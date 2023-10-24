@@ -1,6 +1,5 @@
-const test = require('ava');
-
-const generateMutationQuery = require('../src/generate-mutation-query');
+import test from 'ava';
+import {generateMutationQuery} from '../src/generate-mutation-query.js';
 
 const project = 'Backlog';
 const column = 'To do';
@@ -13,10 +12,10 @@ const moveData = {
 				id: 'MDExOlByb2plY3RDYXJkMzUxNzI2MjM=',
 				project: {
 					name: project,
-					id: 'MDc6UHJvamVjdDQwNzU5MDI='
-				}
-			}
-		]
+					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
+				},
+			},
+		],
 	},
 	repository: {
 		projects: {
@@ -28,23 +27,23 @@ const moveData = {
 						nodes: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ6',
-								name: 'Icebox'
+								name: 'Icebox',
 							},
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
-								name: column
-							}
-						]
-					}
-				}
-			]
+								name: column,
+							},
+						],
+					},
+				},
+			],
 		},
 		owner: {
 			projects: {
-				nodes: []
-			}
-		}
-	}
+				nodes: [],
+			},
+		},
+	},
 };
 
 test('generateMutationQuery move the card when in the correct project and wrong column', t => {
@@ -53,7 +52,7 @@ test('generateMutationQuery move the card when in the correct project and wrong 
 					moveProjectCard( input: {
 						cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM=",
 						columnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-				}) { clientMutationId } }`
+				}) { clientMutationId } }`,
 	]);
 });
 
@@ -62,7 +61,7 @@ test('generateMutationQuery delete the card when it is in the project already', 
 		`mutation {
 						deleteProjectCard( input: {
 							cardId: "MDExOlByb2plY3RDYXJkMzUxNzI2MjM="
-					}) { clientMutationId } }`
+					}) { clientMutationId } }`,
 	]);
 });
 
@@ -72,7 +71,7 @@ test('generateMutationQuery skip issue addition when the card already exists in 
 
 const addData = {
 	projectCards: {
-		nodes: []
+		nodes: [],
 	},
 	repository: {
 		projects: {
@@ -84,23 +83,23 @@ const addData = {
 						nodes: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
-								name: column
+								name: column,
 							},
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44MjUxOTAz',
-								name: 'In progress'
-							}
-						]
-					}
-				}
-			]
+								name: 'In progress',
+							},
+						],
+					},
+				},
+			],
 		},
 		owner: {
 			projects: {
-				nodes: []
-			}
-		}
-	}
+				nodes: [],
+			},
+		},
+	},
 };
 
 test('generateMutationQuery add the card when the card does not exist in the project', t => {
@@ -109,7 +108,7 @@ test('generateMutationQuery add the card when the card does not exist in the pro
 					addProjectCard( input: {
 						contentId: "MDU6SXNzdWU1ODc4NzU1Mjk=",
 						projectColumnId: "MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5"
-				}) { clientMutationId } }`
+				}) { clientMutationId } }`,
 	]);
 });
 
@@ -125,10 +124,10 @@ const archiveData = {
 				isArchived: true,
 				project: {
 					name: project,
-					id: 'MDc6UHJvamVjdDQwNzU5MDI='
-				}
-			}
-		]
+					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
+				},
+			},
+		],
 	},
 	repository: {
 		projects: {
@@ -140,23 +139,23 @@ const archiveData = {
 						nodes: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
-								name: column
+								name: column,
 							},
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44MjUxOTAz',
-								name: 'In progress'
-							}
-						]
-					}
-				}
-			]
+								name: 'In progress',
+							},
+						],
+					},
+				},
+			],
 		},
 		owner: {
 			projects: {
-				nodes: []
-			}
-		}
-	}
+				nodes: [],
+			},
+		},
+	},
 };
 
 test('generateMutationQuery skip issue archive when the card is already archived', t => {
@@ -165,7 +164,7 @@ test('generateMutationQuery skip issue archive when the card is already archived
 
 const dataNoColumn = {
 	projectCards: {
-		nodes: []
+		nodes: [],
 	},
 	repository: {
 		projects: {
@@ -177,19 +176,19 @@ const dataNoColumn = {
 						nodes: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
-								name: 'No project column'
-							}
-						]
-					}
-				}
-			]
+								name: 'No project column',
+							},
+						],
+					},
+				},
+			],
 		},
 		owner: {
 			projects: {
-				nodes: []
-			}
-		}
-	}
+				nodes: [],
+			},
+		},
+	},
 };
 
 test('generateMutationQuery should fail if it cannot find a matching column', t => {
@@ -200,7 +199,7 @@ test('generateMutationQuery should fail if it cannot find a matching column', t 
 
 const dataNoProject = {
 	projectCards: {
-		nodes: []
+		nodes: [],
 	},
 	repository: {
 		projects: {
@@ -212,19 +211,19 @@ const dataNoProject = {
 						nodes: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
-								name: column
-							}
-						]
-					}
-				}
-			]
+								name: column,
+							},
+						],
+					},
+				},
+			],
 		},
 		owner: {
 			projects: {
-				nodes: []
-			}
-		}
-	}
+				nodes: [],
+			},
+		},
+	},
 };
 
 test('generateMutationQuery should fail if it cannot find a matching project', t => {

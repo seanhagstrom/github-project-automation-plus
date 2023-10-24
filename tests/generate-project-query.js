@@ -1,6 +1,5 @@
-const test = require('ava');
-
-const generateProjectQuery = require('../src/generate-project-query');
+import test from 'ava';
+import {generateProjectQuery} from '../src/generate-project-query.js';
 
 const issueQuery = `query {
 		resource( url: "https://github.com/alex-page/test-actions/issues/52" ) {

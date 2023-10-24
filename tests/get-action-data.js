@@ -1,6 +1,5 @@
-const test = require('ava');
-
-const getActionData = require('../src/get-action-data');
+import test from 'ava';
+import {getActionData} from '../src/get-action-data.js';
 
 /* eslint-disable camelcase */
 const mockGithubContext = {
@@ -47,8 +46,8 @@ const mockGithubContext = {
 				starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
 				subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
 				type: 'User',
-				url: 'https://api.github.com/users/alex-page'
-			}
+				url: 'https://api.github.com/users/alex-page',
+			},
 		},
 		repository: {
 			archive_url: 'https://api.github.com/repos/alex-page/test-actions/{archive_format}{/ref}',
@@ -122,7 +121,7 @@ const mockGithubContext = {
 				starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
 				subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
 				type: 'User',
-				url: 'https://api.github.com/users/alex-page'
+				url: 'https://api.github.com/users/alex-page',
 			},
 			private: false,
 			pulls_url: 'https://api.github.com/repos/alex-page/test-actions/pulls{/number}',
@@ -142,7 +141,7 @@ const mockGithubContext = {
 			updated_at: '2020-03-25T14:52:02Z',
 			url: 'https://api.github.com/repos/alex-page/test-actions',
 			watchers: 0,
-			watchers_count: 0
+			watchers_count: 0,
 		},
 		sender: {
 			avatar_url: 'https://avatars1.githubusercontent.com/u/19199063?v=4',
@@ -162,15 +161,15 @@ const mockGithubContext = {
 			starred_url: 'https://api.github.com/users/alex-page/starred{/owner}{/repo}',
 			subscriptions_url: 'https://api.github.com/users/alex-page/subscriptions',
 			type: 'User',
-			url: 'https://api.github.com/users/alex-page'
-		}
+			url: 'https://api.github.com/users/alex-page',
+		},
 	},
 	eventName: 'issues',
 	sha: '526d81e24203000f49d90eb530707b141ae64c89',
 	ref: 'refs/heads/main',
 	workflow: 'Move new issues into "Triage"',
 	action: 'alex-pagegithub-project-automation-plus',
-	actor: 'alex-page'
+	actor: 'alex-page',
 };
 
 /* eslint-enable camelcase */
@@ -179,7 +178,7 @@ test('getActionData should return a formatted object from issue', t => {
 		action: 'opened',
 		eventName: 'issues',
 		nodeId: 'MDU6SXNzdWU1ODc4NzU1Mjk=',
-		url: 'https://github.com/alex-page/test-actions/issues/52'
+		url: 'https://github.com/alex-page/test-actions/issues/52',
 	});
 });
 
@@ -191,9 +190,9 @@ test('getActionData should return a formatted object from comment', t => {
 			action: 'created',
 			issue: {
 				node_id: 'MDFooBar45',
-				html_url: 'https://github.com/alex-page/test-actions/issues/52'
-			}
-		}
+				html_url: 'https://github.com/alex-page/test-actions/issues/52',
+			},
+		},
 	};
 
 	/* eslint-enable camelcase */
@@ -201,7 +200,7 @@ test('getActionData should return a formatted object from comment', t => {
 		action: 'created',
 		eventName: 'issue_comment',
 		nodeId: 'MDFooBar45',
-		url: 'https://github.com/alex-page/test-actions/issues/52'
+		url: 'https://github.com/alex-page/test-actions/issues/52',
 	});
 });
 

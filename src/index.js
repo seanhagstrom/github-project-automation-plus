@@ -1,11 +1,10 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+import * as core from '@actions/core';
+import * as github from '@actions/github';
+import {getActionData} from './get-action-data.js';
+import {generateProjectQuery} from './generate-project-query.js';
+import {generateMutationQuery} from './generate-mutation-query.js';
 
-const getActionData = require('./get-action-data');
-const generateProjectQuery = require('./generate-project-query');
-const generateMutationQuery = require('./generate-mutation-query');
-
-(async () => {
+async function main() {
 	try {
 		const token = core.getInput('repo-token');
 		const project = core.getInput('project');
@@ -47,4 +46,6 @@ const generateMutationQuery = require('./generate-mutation-query');
 	} catch (error) {
 		core.setFailed(error.message);
 	}
-})();
+}
+
+await main();

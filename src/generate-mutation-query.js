@@ -9,18 +9,18 @@
  */
 // if this is important, we will need to refactor the function
 // eslint-disable-next-line max-params
-const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
+export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
 	// All the projects found in organisation and repositories
 	const repoProjects = data.repository.projects.nodes || [];
-	const orgProjects = (data.repository.owner &&
-		data.repository.owner.projects &&
-		data.repository.owner.projects.nodes) ||
-		[];
+	const orgProjects = (data.repository.owner
+			&& data.repository.owner.projects
+			&& data.repository.owner.projects.nodes)
+			|| [];
 
 	// Find matching projects and columns for the card to move to
 	const endLocation = [...repoProjects, ...orgProjects]
 		.filter(project => project.name === projectName)
-		.flatMap(project => project)
+		.flat()
 		.filter(project => {
 			const matchingColumns = project.columns.nodes
 				.filter(column => column.name === columnName);
@@ -39,7 +39,7 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 		cardLocations[project.id] = {
 			columnId: project.columns.nodes
 				.filter(column => column.name === columnName)
-				.map(column => column.id)[0]
+				.map(column => column.id)[0],
 		};
 	}
 
@@ -56,14 +56,13 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 	const mutations = Object.keys(cardLocations).map(mutation => {
 		if (action === 'update') {
 			// Othervise keep default procedure
-			return cardLocations[mutation].cardId ?
-				`mutation {
+			return cardLocations[mutation].cardId
+				? `mutation {
 					moveProjectCard( input: {
 						cardId: "${cardLocations[mutation].cardId}",
 						columnId: "${cardLocations[mutation].columnId}"
-				}) { clientMutationId } }` :
-
-				`mutation {
+				}) { clientMutationId } }`
+				: `mutation {
 					addProjectCard( input: {
 						contentId: "${contentId}",
 						projectColumnId: "${cardLocations[mutation].columnId}"
@@ -82,9 +81,9 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 		if (action === 'archive' && !cardLocations[mutation].isArchived) {
 			// Archive issue  if not already archived
 			return `mutation {
-						updateProjectCard(input: { 
-							projectCardId: "${cardLocations[mutation].cardId}", 
-							isArchived: true 
+						updateProjectCard(input: {
+							projectCardId: "${cardLocations[mutation].cardId}",
+							isArchived: true
 					}) { clientMutationId } }`;
 		}
 
@@ -102,5 +101,3 @@ const generateMutationQuery = (data, projectName, columnName, contentId, action)
 
 	return mutations.filter(m => m !== undefined);
 };
-
-module.exports = generateMutationQuery;

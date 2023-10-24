@@ -16,9 +16,9 @@ inputs:
       Can be `update`, `delete` or `archive` or `add`. This determines the type of the action
       to be performed on the card
     required: false
-    default: "update"
+    default: 'update'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: 'cpu'
