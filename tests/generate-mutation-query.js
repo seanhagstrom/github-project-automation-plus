@@ -1,7 +1,7 @@
 import test from 'ava';
 import {generateMutationQuery} from '../src/generate-mutation-query.js';
 
-const project = 'Backlog';
+const project = 'test';
 const column = 'To do';
 const nodeId = 'MDU6SXNzdWU1ODc4NzU1Mjk=';
 
@@ -24,7 +24,7 @@ const moveData = {
 					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
 					name: project,
 					columns: {
-						nodes: [
+						options: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ6',
 								name: 'Icebox',
@@ -80,7 +80,7 @@ const addData = {
 					name: project,
 					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
 					columns: {
-						nodes: [
+						options: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
 								name: column,
@@ -136,7 +136,7 @@ const archiveData = {
 					name: project,
 					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
 					columns: {
-						nodes: [
+						options: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
 								name: column,
@@ -173,7 +173,7 @@ const dataNoColumn = {
 					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
 					name: project,
 					columns: {
-						nodes: [
+						options: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
 								name: 'No project column',
@@ -208,7 +208,7 @@ const dataNoProject = {
 					id: 'MDc6UHJvamVjdDQwNzU5MDI=',
 					name: 'No project name',
 					columns: {
-						nodes: [
+						options: [
 							{
 								id: 'MDEzOlByb2plY3RDb2x1bW44NDU0MzQ5',
 								name: column,

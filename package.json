@@ -8,7 +8,8 @@
 	"scripts": {
 		"watch": "ncc build src/index.js --watch --minify",
 		"build": "ncc build src/index.js --minify",
-		"test": "ava && xo"
+		"test": "ava && xo",
+		"test:ava": "ava"
 	},
 	"xo": {
 		"rules": {

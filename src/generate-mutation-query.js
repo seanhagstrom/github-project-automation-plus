@@ -12,7 +12,7 @@
 export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
   // Get fieldId from ProjectV2 Data
   console.log('action: ')
-  console.log(action)
+  console.log(action, projectName, columnName, contentId)
   const fieldId =
     data.repository?.projects?.nodes[0]?.columns?.fieldId ||
     data.repository?.owner?.projects?.nodes[0]?.columns?.fieldId;
@@ -50,9 +50,12 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
     [];
 
   // Find matching projects and columns for the card to move to
+  console.log('repoProjects and orgProjects below VVVVVVVVVVVV')
+  console.log(repoProjects)
+  console.log(data.repository.owner.projects.nodes)
   const endLocation = [...repoProjects, ...orgProjects]
     .filter((project) => project.name === projectName)
-    .flatMap((project) => project)
+    .flat()
     .filter((project) => {
       const matchingColumns = project.columns.nodes.filter(
         (column) => column.name === columnName
@@ -77,6 +80,8 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
         .map((column) => column.id)[0],
     };
   }
+
+  console.log(cardLocations)
 
   // See if the card exists in the provided project
   const currentLocation = data.projectCards.nodes.filter(

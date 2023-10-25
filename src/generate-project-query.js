@@ -9,52 +9,52 @@ export const generateProjectQuery = (url, eventName, project) =>
 `query {
 	resource( url: "${url}" ) {
 		... on ${eventName.startsWith("issue") ? "Issue" : "PullRequest"} {
-		projectCards: projectItems(first: 100) {
-			nodes {
-			id
-			isArchived
-			project {
-				name: title
-				id
-			}
-			}
-		}
-		repository {
-			projects: projectsV2(query: "title: ${project}", first: 10) {
-			nodes {
-				name: title
-				id
-				columns: field(name: "Status") {
-				... on ProjectV2SingleSelectField {
-					fieldId: id
-					options {
+			projectCards: projectItems(first: 100) {
+				nodes {
 					id
-					name
+					isArchived
+					project {
+						name: title
+						id
 					}
 				}
-				}
 			}
-			}
-			owner {
-			... on ProjectV2Owner {
+			repository {
 				projects: projectsV2(query: "title: ${project}", first: 10) {
-				nodes {
-					name: title
-					id
-					columns: field(name: "Status") {
-					... on ProjectV2SingleSelectField {
-						fieldId: id
-						options {
+					nodes {
+						name: title
 						id
-						name
+						columns: field(name: "Status") {
+							... on ProjectV2SingleSelectField {
+								fieldId: id
+								options {
+									id
+									name
+								}
+							}
 						}
 					}
+				}
+				owner {
+					... on ProjectV2Owner {
+						projects: projectsV2(query: "title: ${project}", first: 10) {
+							nodes {
+								name: title
+								id
+								columns: field(name: "Status") {
+									... on ProjectV2SingleSelectField {
+										fieldId: id
+										options {
+											id
+											name
+										}
+									}
+								}
+							}
+						}
 					}
 				}
-				}
 			}
-			}
-		}
 		}
 	}
-	}`;
+}`;
