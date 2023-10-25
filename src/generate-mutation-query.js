@@ -80,17 +80,19 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
     };
   }
 
-  console.log(cardLocations)
 
   // See if the card exists in the provided project
   const currentLocation = data.projectCards.nodes.filter(
     (card) => card.project.name === projectName
-  );
+    );
 
-  for (const card of currentLocation) {
-    cardLocations[card.project.id].cardId = card.id;
-    cardLocations[card.project.id].isArchived = card.isArchived;
-  }
+    for (const card of currentLocation) {
+      cardLocations[card.project.id].cardId = card.id;
+      cardLocations[card.project.id].isArchived = card.isArchived;
+    }
+
+    console.log("cardLocations: -------------------->>>>>>>>>>>>>>>")
+    console.log(cardLocations)
 
   // If the card already exists in the project move it otherwise add a new card
   const mutations = Object.keys(cardLocations).map((mutation) => {
@@ -157,7 +159,7 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
     return undefined;
   });
 
-  // console.log("mutations below:::::::::::::::::::::::")
-  // console.log(mutations)
+  console.log("mutations below:::::::::::::::::::::::")
+  console.log(mutations)
   return mutations.filter((m) => m !== undefined);
 };

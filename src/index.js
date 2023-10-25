@@ -35,6 +35,8 @@ async function main() {
 		}
 
 		core.debug(mutationQueries.join('\n'));
+		console.log("mutationQueries in index.js")
+		console.log(mutationQueries)
 
 		// Run the graphql queries
 		await Promise.all(mutationQueries.map(query => octokit.graphql(query)));
