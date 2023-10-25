@@ -21,12 +21,16 @@ async function main() {
 		// Get the column ID from searching for the project and card Id if it exists
 		const projectQuery = generateProjectQuery(url, eventName, project);
 
+		console.log(`projectQuery: ${projectQuery}`)
+
 		core.debug(projectQuery);
 
 		const {resource} = await octokit.graphql(projectQuery);
 
-		console.log(`projectCards: ${resource.projectCards}`)
-		console.log(`repository: ${resource.repository}`)
+		console.log('project cards: ')
+		console.log(resource.projectCards)
+		console.log('repository: ')
+		console.log(resource.repository)
 
 
 		core.debug(JSON.stringify(resource));
