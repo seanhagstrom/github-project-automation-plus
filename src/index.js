@@ -30,6 +30,8 @@ console.log(url)
 
 		const {resource} = await octokit.graphql(projectQuery);
 
+		console.log("resource: ")
+		console.log(resource)
 		console.log('project cards: ')
 		console.log(resource.projectCards)
 		console.log('repository: ')
