@@ -12,7 +12,10 @@
 	},
 	"xo": {
 		"rules": {
-			"unicorn/numeric-separators-style": "off"
+			"unicorn/numeric-separators-style": "off",
+			"new-cap": "off",
+			"capitalized-comments": "off",
+			"semi": "off"
 		}
 	},
 	"repository": {
