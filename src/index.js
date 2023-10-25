@@ -28,10 +28,12 @@ console.log(url)
 
 		console.log(octokit.graphql)
 
-		const {resource} = await octokit.graphql(projectQuery);
+		// const {resource} = await octokit.graphql(projectQuery);
+		const response = await octokit.graphql(projectQuery);
 
-		console.log("resource: ")
-		console.log(resource)
+		const {resource} = response
+		console.log("response: ")
+		console.log(response)
 		console.log('project cards: ')
 		console.log(resource.projectCards)
 		console.log('repository: ')
