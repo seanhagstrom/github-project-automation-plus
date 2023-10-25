@@ -11,8 +11,7 @@
 // eslint-disable-next-line max-params
 export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
   // Get fieldId from ProjectV2 Data
-  console.log('action: ')
-  console.log(action, projectName, columnName, contentId)
+
   const fieldId =
     data.repository?.projects?.nodes[0]?.columns?.fieldId ||
     data.repository?.owner?.projects?.nodes[0]?.columns?.fieldId;
@@ -103,7 +102,7 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
 				projectId: "${mutation}",
 				itemId: "${cardLocations[mutation].cardId}",
 				fieldId: "${fieldId}",
-				values: {
+				value: {
 					singleSelectOptionId: "${cardLocations[mutation].columnId}"
 				}
 			}) {
@@ -158,5 +157,7 @@ export const generateMutationQuery = (data, projectName, columnName, contentId, 
     return undefined;
   });
 
+  // console.log("mutations below:::::::::::::::::::::::")
+  // console.log(mutations)
   return mutations.filter((m) => m !== undefined);
 };
