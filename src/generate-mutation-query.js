@@ -11,6 +11,8 @@
 // eslint-disable-next-line max-params
 export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
   // Get fieldId from ProjectV2 Data
+  console.log('action: ')
+  console.log(action)
   const fieldId =
     data.repository?.projects?.nodes[0]?.columns?.fieldId ||
     data.repository?.owner?.projects?.nodes[0]?.columns?.fieldId;
