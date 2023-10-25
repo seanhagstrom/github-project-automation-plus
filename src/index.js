@@ -13,7 +13,8 @@ async function main() {
 
 		// Get data from the current action
 		const {eventName, nodeId, url} = getActionData(github.context);
-
+console.log('project url: ')
+console.log(url)
 		// Create a method to query GitHub
 		// const octokit = new github.GitHub(token);
 		const octokit = new github.getOctokit(token);

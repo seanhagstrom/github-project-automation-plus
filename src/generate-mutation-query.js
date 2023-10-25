@@ -10,6 +10,8 @@
 // if this is important, we will need to refactor the function
 // eslint-disable-next-line max-params
 export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
+	console.log('data in generate-mutation-query.js')
+	console.log(data)
 	// All the projects found in organisation and repositories
 	const repoProjects = data.repository.projects.nodes || [];
 	console.log({repoProjects})
