@@ -13,8 +13,7 @@ async function main() {
 
 		// Get data from the current action
 		const {eventName, nodeId, url} = getActionData(github.context);
-console.log('project url: ')
-console.log(url)
+
 		// Create a method to query GitHub
 		// const octokit = new github.GitHub(token);
 		const octokit = new github.getOctokit(token);
@@ -22,23 +21,9 @@ console.log(url)
 		// Get the column ID from searching for the project and card Id if it exists
 		const projectQuery = generateProjectQuery(url, eventName, project);
 
-		console.log(`projectQuery: ${projectQuery}`)
-
 		core.debug(projectQuery);
 
-		console.log(octokit.graphql.query)
-
-		// const {resource} = await octokit.graphql(projectQuery);
-		const response = await octokit.graphql(projectQuery);
-
-		const {resource} = response
-		console.log("response: ")
-		console.log(response)
-		console.log('project cards: ')
-		console.log(resource.projectCards)
-		console.log('repository: ')
-		console.log(resource.repository)
-
+		const {resource} = await octokit.graphql(projectQuery);
 
 		core.debug(JSON.stringify(resource));
 

@@ -6,49 +6,55 @@
  * @param {string} project - The project to find
  */
 export const generateProjectQuery = (url, eventName, project) =>
-	`query {
-		resource( url: "${url}" ) {
-			... on ${eventName.startsWith('issue') ? 'Issue' : 'PullRequest'} {
-				projectCards {
-					nodes {
-						id
-						isArchived
-						project {
-							name
-							id
-						}
-					}
-				}
-				repository {
-					projects( search: "${project}", first: 10, states: [OPEN] ) {
-						nodes {
-							name
-							id
-							columns( first: 100 ) {
-								nodes {
-									id
-									name
-								}
-							}
-						}
-					}
-					owner {
-						... on ProjectOwner {
-							projects( search: "${project}", first: 10, states: [OPEN] ) {
-								nodes {
-									name
-									id
-									columns( first: 100 ) {
-										nodes {
-											id
-											name
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+`query {
+	resource( url: "${url}" ) {
+		... on ${eventName.startsWith("issue") ? "Issue" : "PullRequest"} {
+		projectCards: projectItems(first: 100) {
+			nodes {
+			id
+			isArchived
+			project {
+				name: title
+				id
+			}
 			}
 		}
+		repository {
+			projects: projectsV2(query: "title: ${project}", first: 10) {
+			nodes {
+				name: title
+				id
+				columns: field(name: "Status") {
+				... on ProjectV2SingleSelectField {
+					fieldId: id
+					options {
+					id
+					name
+					}
+				}
+				}
+			}
+			}
+			owner {
+			... on ProjectV2Owner {
+				projects: projectsV2(query: "title: ${project}", first: 10) {
+				nodes {
+					name: title
+					id
+					columns: field(name: "Status") {
+					... on ProjectV2SingleSelectField {
+						fieldId: id
+						options {
+						id
+						name
+						}
+					}
+					}
+				}
+				}
+			}
+			}
+		}
+		}
+	}
 	}`;
