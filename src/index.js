@@ -26,7 +26,7 @@ console.log(url)
 
 		core.debug(projectQuery);
 
-		console.log(await octokit.graphql())
+		console.log(octokit)
 
 		const {resource} = await octokit.graphql(projectQuery);
 
