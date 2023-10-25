@@ -12,6 +12,7 @@
 export const generateMutationQuery = (data, projectName, columnName, contentId, action) => {
 	// All the projects found in organisation and repositories
 	const repoProjects = data.repository.projects.nodes || [];
+	console.log({repoProjects})
 	const orgProjects = (data.repository.owner
 			&& data.repository.owner.projects
 			&& data.repository.owner.projects.nodes)

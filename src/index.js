@@ -23,10 +23,11 @@ async function main() {
 
 		core.debug(projectQuery);
 
-		// const {resource} = await octokit.graphql(projectQuery);
-		const response = await octokit.graphql(projectQuery);
-		console.log({response})
-		const {resource} = response;
+		const {resource} = await octokit.graphql(projectQuery);
+
+		console.log(`projectCards: ${resource.projectCards}`)
+		console.log(`repository: ${resource.repository}`)
+
 
 		core.debug(JSON.stringify(resource));
 
