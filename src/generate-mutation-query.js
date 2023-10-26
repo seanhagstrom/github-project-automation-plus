@@ -5,7 +5,7 @@
  * @param {string} projectName - The user inputted project name
  * @param {string} columnName - The user inputted column name
  * @param {string} contentId - The id of the issue or pull request
- * @param {"delete"|"archive"|"update"} action - the action to be performed on the card
+ * @param {"delete"|"archive"|"update"|"add"} action - the action to be performed on the card
  */
 // if this is important, we will need to refactor the function
 // eslint-disable-next-line max-params
